@@ -27,7 +27,9 @@ import {
     rightAxisTextColorProperty,
     rightAxisTextColorCssProperty,
     xAxisMinValueProperty,
+    xAxisMinVisibleValueProperty,
     xAxisMaxValueProperty,
+    xAxisMaxVisibleValueProperty,
     leftAxisMinValueProperty,
     leftAxisMaxValueProperty,
     rightAxisMinValueProperty,
@@ -91,6 +93,9 @@ export class MPLineChart extends MPChartBase {
         lineChartView.setDescription(description);
         lineChartView.setDoubleTapToZoomEnabled(false);
         lineChartView.setScaleEnabled(false);
+        lineChartView.setAutoScaleMinMaxEnabled(false);
+        lineChartView.setKeepPositionOnRotation(true);
+        
         return lineChartView;
     }
     public [itemsProperty.setNative](items: Array<DataLineChartInterface>) {
@@ -411,7 +416,6 @@ export class MPLineChart extends MPChartBase {
         let xAxis: com.github.mikephil.charting.components.XAxis;
         xAxis = this.nativeView.getXAxis();
         if (xAxis) {
-            console.log("xAxisMinValueProperty ", value);
             xAxis.setAxisMinimum(value);
         }
         else {
@@ -419,16 +423,24 @@ export class MPLineChart extends MPChartBase {
         }
     }
 
+    public [xAxisMinVisibleValueProperty.setNative](value: number) {
+        this.nativeView.setVisibleXRangeMinimum(value);
+        this.nativeView.moveViewToX(value);
+    }
+
     public [xAxisMaxValueProperty.setNative](value: number) {
         let xAxis: com.github.mikephil.charting.components.XAxis;
         xAxis = this.nativeView.getXAxis();
         if (xAxis) {
-            console.log("xAxisMinValueProperty ", value);
             xAxis.setAxisMaximum(value);
         }
         else {
             throw new Error("Property  'xAxis' of Chart undefined");
         }
+    }
+
+    public [xAxisMaxVisibleValueProperty.setNative](value: number) {
+        this.nativeView.setVisibleXRangeMaximum(value);
     }
 
     public [leftAxisMinValueProperty.setNative](value: number) {

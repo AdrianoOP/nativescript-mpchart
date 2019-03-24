@@ -34,8 +34,10 @@ export class AppComponent {
         rightAxisLineColor: "#00ff00",
         rightAxisTextColor: "#00ff00",
 
-        xAxisMinValue: -1,
-        xAxisMaxValue: 4,
+        xAxisMinValue: 0,
+        xAxisMaxValue: 10,
+        xAxisMinVisibleValue: 2,
+        xAxisMaxVisibleValue: 4,
 
         leftAxisMinValue: 0,
         leftAxisMaxValue: 100,

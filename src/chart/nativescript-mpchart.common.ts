@@ -381,6 +381,19 @@ export const xAxisMinValueProperty = new Property<MPChartBase, number>({
 });
 xAxisMinValueProperty.register(MPChartBase);
 
+export const xAxisMinVisibleValueProperty = new Property<MPChartBase, number>({
+    name: "xAxisMinVisibleValue",
+    defaultValue: 0,
+    valueConverter: (v) => {
+        console.log("xAxisVisibleMinValueProperty common", v);
+        if (parseFloat(v) !== NaN) {
+            return parseFloat(v);
+        }
+        throw new Error("Property 'xAxisMinVisibleValue' must be a number");
+    }
+});
+xAxisMinVisibleValueProperty.register(MPChartBase);
+
 
 export const xAxisMaxValueProperty = new Property<MPChartBase, number>({
     name: "xAxisMaxValue",
@@ -393,6 +406,18 @@ export const xAxisMaxValueProperty = new Property<MPChartBase, number>({
     }
 });
 xAxisMaxValueProperty.register(MPChartBase);
+
+export const xAxisMaxVisibleValueProperty = new Property<MPChartBase, number>({
+    name: "xAxisMaxVisibleValue",
+    defaultValue: 0,
+    valueConverter: (v) => {
+        if (parseFloat(v) !== NaN) {
+            return parseFloat(v);
+        }
+        throw new Error("Property 'xAxisMaxVisibleValue' must be a number");
+    }
+});
+xAxisMaxVisibleValueProperty.register(MPChartBase);
 
 export const leftAxisMinValueProperty = new Property<MPChartBase, number>({
     name: "leftAxisMinValue",
