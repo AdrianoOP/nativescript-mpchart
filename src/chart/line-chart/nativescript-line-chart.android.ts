@@ -27,9 +27,7 @@ import {
     rightAxisTextColorProperty,
     rightAxisTextColorCssProperty,
     xAxisMinValueProperty,
-    xAxisMinVisibleValueProperty,
     xAxisMaxValueProperty,
-    xAxisMaxVisibleValueProperty,
     leftAxisMinValueProperty,
     leftAxisMaxValueProperty,
     rightAxisMinValueProperty,
@@ -41,10 +39,13 @@ import {
     showLeftAxisProperty,
     showRightAxisProperty,
     showValueLabelsProperty,
+    visibleXRangeMinimumProperty,
+    visibleXRangeMaximumProperty,
+    xAxisXPositionProperty,
     DataLineChartInterface,
     DataSetChartInterface,
     DataSetLabelInterface,
-    YAxisFormatterInterface
+    YAxisFormatterInterface,
 } from "../nativescript-mpchart.common";
 import { Color } from "tns-core-modules/color";
 import * as application from "tns-core-modules/application";
@@ -95,7 +96,6 @@ export class MPLineChart extends MPChartBase {
         lineChartView.setScaleEnabled(false);
         lineChartView.setAutoScaleMinMaxEnabled(false);
         lineChartView.setKeepPositionOnRotation(true);
-        
         return lineChartView;
     }
     public [itemsProperty.setNative](items: Array<DataLineChartInterface>) {
@@ -111,13 +111,25 @@ export class MPLineChart extends MPChartBase {
                 if (entries.length) {
                     let dataset: com.github.mikephil.charting.data.LineDataSet = new LineDataSet(new ArrayList(java.util.Arrays.asList(entries)), labelLegend);
                     dataset.setColor(items[i].lineColor.android);
-                    let drawCircle = items[i].circleHoleEnabled ? !!items[i].circleHoleEnabled : false
-                    dataset.setDrawCircleHole(drawCircle);
-                    if (items[i].circleColor) {
+                    dataset.setDrawCircleHole(false);
+                    dataset.setDrawCircles(false);
+                    if (items[i].cubicIntensity) {
+                        dataset.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+                        dataset.setCubicIntensity(items[i].cubicIntensity);
+                    }
+                    if (items[i].lineWidth) {
+                        dataset.setLineWidth(items[i].lineWidth);
+                    }
+                    if (items[i].circleEnable &&
+                        items[i].circleColor) {
+                        dataset.setCircleSize(5);
+                        dataset.setDrawCircles(true);
+                        if (items[i].circleHoleEnabled) {
+                            dataset.setCircleHoleRadius(3);
+                            dataset.setDrawCircleHole(true);
+                        }
                         dataset.setCircleColor(items[i].circleColor.android);
                     }
-                    dataset.setCircleHoleRadius(3);
-                    let circleEnable = items[i].circleEnable ? !!items[i].circleEnable : false
                     dataset.setHighlightEnabled(false);
 
                     if (items[i].highlighColor) {
@@ -130,7 +142,6 @@ export class MPLineChart extends MPChartBase {
                         dataset.setDrawValues(true);
                     }
                     lineDatasets.add(dataset);
-
                 }
             }
             else {
@@ -423,11 +434,6 @@ export class MPLineChart extends MPChartBase {
         }
     }
 
-    public [xAxisMinVisibleValueProperty.setNative](value: number) {
-        this.nativeView.setVisibleXRangeMinimum(value);
-        this.nativeView.moveViewToX(value);
-    }
-
     public [xAxisMaxValueProperty.setNative](value: number) {
         let xAxis: com.github.mikephil.charting.components.XAxis;
         xAxis = this.nativeView.getXAxis();
@@ -437,10 +443,6 @@ export class MPLineChart extends MPChartBase {
         else {
             throw new Error("Property  'xAxis' of Chart undefined");
         }
-    }
-
-    public [xAxisMaxVisibleValueProperty.setNative](value: number) {
-        this.nativeView.setVisibleXRangeMaximum(value);
     }
 
     public [leftAxisMinValueProperty.setNative](value: number) {
@@ -599,4 +601,15 @@ export class MPLineChart extends MPChartBase {
         }
     }
 
+    public [visibleXRangeMinimumProperty.setNative](value: number) {
+        this.nativeView.setVisibleXRangeMinimum(value);
+    }
+
+    public [visibleXRangeMaximumProperty.setNative](value: number) {
+        this.nativeView.setVisibleXRangeMaximum(value);
+    }
+
+    public [xAxisXPositionProperty.setNative](value: number) {
+        this.nativeView.moveViewToX(value);
+    }
 }

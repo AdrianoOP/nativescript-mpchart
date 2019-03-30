@@ -13,18 +13,20 @@ export interface DataSetChartInterface {
 }
 
 export interface DataSetLabelInterface {
-    xAxisValue: number,
-    label: string
+    xAxisValue: number;
+    label: string;
 }
 
 export interface YAxisFormatterInterface {
-    type: TypeFormatter,
-    numberOfDigits?: number
+    type: TypeFormatter;
+    numberOfDigits?: number;
 }
 
 export interface DataLineChartInterface {
     dataSet: Array<DataSetChartInterface>;
     lineColor: Color;
+    lineWidth?: number;
+    cubicIntensity?: number;
     highlighColor?: Color;
     circleHoleEnabled?: boolean;
     circleColor?: Color;
@@ -35,13 +37,12 @@ export interface DataLineChartInterface {
 export interface DataBarChartInterface {
     dataSet: Array<DataSetChartInterface>;
     legendLabel?: string;
-    highlighColor?: Color,
+    highlighColor?: Color;
     barColor?: Color;
 }
 // Type
 export type XAxisLabelPosition = "Top" | "Bottom" | "BothSided" | "TopInside" | "BottomInside";
-export type TypeFormatter = "Int" | "Float"
-
+export type TypeFormatter = "Int" | "Float";
 // Property
 
 export const itemsProperty = new Property<MPChartBase, Array<DataLineChartInterface>>({
@@ -381,20 +382,6 @@ export const xAxisMinValueProperty = new Property<MPChartBase, number>({
 });
 xAxisMinValueProperty.register(MPChartBase);
 
-export const xAxisMinVisibleValueProperty = new Property<MPChartBase, number>({
-    name: "xAxisMinVisibleValue",
-    defaultValue: 0,
-    valueConverter: (v) => {
-        console.log("xAxisVisibleMinValueProperty common", v);
-        if (parseFloat(v) !== NaN) {
-            return parseFloat(v);
-        }
-        throw new Error("Property 'xAxisMinVisibleValue' must be a number");
-    }
-});
-xAxisMinVisibleValueProperty.register(MPChartBase);
-
-
 export const xAxisMaxValueProperty = new Property<MPChartBase, number>({
     name: "xAxisMaxValue",
     defaultValue: 0,
@@ -406,18 +393,6 @@ export const xAxisMaxValueProperty = new Property<MPChartBase, number>({
     }
 });
 xAxisMaxValueProperty.register(MPChartBase);
-
-export const xAxisMaxVisibleValueProperty = new Property<MPChartBase, number>({
-    name: "xAxisMaxVisibleValue",
-    defaultValue: 0,
-    valueConverter: (v) => {
-        if (parseFloat(v) !== NaN) {
-            return parseFloat(v);
-        }
-        throw new Error("Property 'xAxisMaxVisibleValue' must be a number");
-    }
-});
-xAxisMaxVisibleValueProperty.register(MPChartBase);
 
 export const leftAxisMinValueProperty = new Property<MPChartBase, number>({
     name: "leftAxisMinValue",
@@ -509,3 +484,39 @@ export const markerProperty = new Property<MPChartBase, ChartMarkerConfig>({
     name: "marker",
 });
 markerProperty.register(MPChartBase);
+
+export const visibleXRangeMinimumProperty = new Property<MPChartBase, number>({
+    name: "visibleXRangeMinimumValue",
+    defaultValue: 0,
+    valueConverter: (v) => {
+        if (parseFloat(v) !== NaN) {
+            return parseFloat(v);
+        }
+        throw new Error("Property 'visibleXRangeMinimumValue' must be a number");
+    }
+});
+visibleXRangeMinimumProperty.register(MPChartBase);
+
+export const visibleXRangeMaximumProperty = new Property<MPChartBase, number>({
+    name: "visibleXRangeMaximumValue",
+    defaultValue: 0,
+    valueConverter: (v) => {
+        if (parseFloat(v) !== NaN) {
+            return parseFloat(v);
+        }
+        throw new Error("Property 'visibleXRangeMaximumValue' must be a number");
+    }
+});
+visibleXRangeMaximumProperty.register(MPChartBase);
+
+export const xAxisXPositionProperty = new Property<MPChartBase, number>({
+    name: "xAxisXPositionValue",
+    defaultValue: 0,
+    valueConverter: (v) => {
+        if (parseFloat(v) !== NaN) {
+            return parseFloat(v);
+        }
+        throw new Error("Property 'xAxisXPositionValue' must be a number");
+    }
+});
+xAxisXPositionProperty.register(MPChartBase);

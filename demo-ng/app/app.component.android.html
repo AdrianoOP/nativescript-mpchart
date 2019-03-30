@@ -9,12 +9,16 @@
             [leftAxisGranularity]="setUp.leftAxisGranularityProperty" [rightAxisGranularity]="setUp.rightAxisGranularityProperty"
             [xAxisLineColor]="setUp.xAxisLineColor" [leftAxisLineColor]="setUp.leftAxisLineColor" [rightAxisLineColor]="setUp.rightAxisLineColor"
             [xAxisTextColor]="setUp.xAxisTextColor" [leftAxisTextColor]="setUp.leftAxisTextColor" [rightAxisTextColor]="setUp.rightAxisTextColor"
-            [xAxisMinValue]="setUp.xAxisMinValue" [xAxisMinVisibleValue]="setUp.xAxisMinVisibleValue"
+            [xAxisMinValue]="setUp.xAxisMinValue"
              [leftAxisMinValue]="setUp.leftAxisMinValue" [rightAxisMinValue]="setUp.rightAxisMinValue"
-            [xAxisMaxValue]="setUp.xAxisMaxValue" [xAxisMaxVisibleValue]="setUp.xAxisMaxVisibleValue"
+            [xAxisMaxValue]="setUp.xAxisMaxValue"
              [leftAxi sMaxValue]="setUp.leftAxisMaxValue" [rightAxisMaxValue]="setUp.rightAxisMaxValue"
             [leftAxisFormatter]="leftAxisFormatter" [rightAxisFormatter]="rightAxisFormatter" [items]="dataSet" [labels]="labels"
-            [showValueLabels]="setUp.showValueLabels" #lineChart class="mp-chart"></MPLineChart>
+            [showValueLabels]="setUp.showValueLabels"
+            [visibleXRangeMinimumValue]="setUp.visibleXRangeMinimumValue"
+            [visibleXRangeMaximumValue]="setUp.visibleXRangeMaximumValue"
+            [xAxisXPositionValue]="setUp.xAxisXPositionValue"
+            #lineChart class="mp-chart"></MPLineChart>
     </StackLayout>
     <!-- <StackLayout height="500">
         <MPBarChart height="400" #lineChart *ngIf="barDataSet" [items]="barDataSet" [labels]="labels" [showLegend]="setUp.showLegend"
