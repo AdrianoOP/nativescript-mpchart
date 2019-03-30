@@ -1,3 +1,5 @@
+Forked from LeCaoPhuc for minor improvements in Android... Documentation not updated
+
 # NativeScript MPChart UI 
 A NativeScript MPChart for Android and iOS.
 This plugin still in develop and will update more type chart and feature in future.

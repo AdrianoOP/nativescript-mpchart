@@ -20,6 +20,8 @@ export interface YAxisFormatterInterface {
 export interface DataLineChartInterface {
     dataSet: Array<DataSetChartInterface>;
     lineColor: Color;
+    lineWidth?: number;
+    cubicIntensity?: number;
     highlighColor?: Color;
     circleHoleEnabled?: boolean;
     circleColor?: Color;
@@ -75,3 +77,6 @@ export declare const showValueLabelsProperty: Property<MPChartBase, boolean>;
 export declare const showLeftAxisProperty: Property<MPChartBase, boolean>;
 export declare const showRightAxisProperty: Property<MPChartBase, boolean>;
 export declare const markerProperty: Property<MPChartBase, ChartMarkerConfig>;
+export declare const visibleXRangeMinimumProperty: Property<MPChartBase, number>;
+export declare const visibleXRangeMaximumProperty: Property<MPChartBase, number>;
+export declare const xAxisXPositionProperty: Property<MPChartBase, number>;

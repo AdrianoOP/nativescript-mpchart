@@ -1,6 +1,6 @@
 import { Component, ViewChild, ElementRef, ChangeDetectorRef, Self } from "@angular/core";
 import { Color } from "tns-core-modules/color/color";
-import { DataLineChartInterface, DataBarChartInterface, DataSetChartInterface, DataSetLabelInterface, YAxisFormatterInterface, ChartMarkerConfig } from "nativescript-mpchart/index";
+import { DataLineChartInterface, DataBarChartInterface, DataSetChartInterface, DataSetLabelInterface, YAxisFormatterInterface, ChartMarkerConfig} from "nativescript-mpchart/index";
 declare var UIFont: any;
 declare var BarChartData: any;
 @Component({
@@ -34,8 +34,11 @@ export class AppComponent {
         rightAxisLineColor: "#00ff00",
         rightAxisTextColor: "#00ff00",
 
-        xAxisMinValue: -1,
-        xAxisMaxValue: 4,
+        xAxisMinValue: -10,
+        xAxisMaxValue: 10,
+        visibleXRangeMinimumValue: 0.1,
+        visibleXRangeMaximumValue: 3,
+        xAxisXPositionValue: 0.3,
 
         leftAxisMinValue: 0,
         leftAxisMaxValue: 100,
@@ -57,6 +60,7 @@ export class AppComponent {
         type: "Float",
         numberOfDigits: 1
     };
+
     public markerConfig: ChartMarkerConfig
     public dataSet: Array<DataLineChartInterface>;
     public barDataSet: Array<DataBarChartInterface>;
@@ -73,7 +77,7 @@ export class AppComponent {
         let arrDataView: Array<DataSetChartInterface> = [];
         for (let i = 0; i < 8; i++) {
             arrDataView1.push({
-                x: i,
+                x: i * 0.1,
                 y: i * 9,
             });
             arrDataView2.push({
@@ -143,8 +147,6 @@ export class AppComponent {
         setTimeout(function () {
             // console.log("ngOnInit ", self.lineChart.nativeElement.ios.leftAxis.axisMinimum);
         }, 500)
-
-        // this.setUp.leftAxisMinValue = 0;
     }
 
     onTap(args) {
