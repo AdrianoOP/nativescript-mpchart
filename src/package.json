@@ -1,6 +1,6 @@
 {
     "name": "nativescript-mpchart-fork-adrianoop",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "description": "NativeScript MPChart",
     "main": "nativescript-mpchart",
     "typings": "index.d.ts",
